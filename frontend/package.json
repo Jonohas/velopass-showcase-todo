@@ -9,10 +9,13 @@
     "build": "bun run build.ts"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "bun-plugin-tailwind": "^0.0.15",
+    "classnames": "^2.5.1",
     "react": "^19",
     "react-dom": "^19",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@types/react": "^19",

@@ -12,6 +12,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS: allow only the frontend origin http://localhost:3000
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +39,9 @@ if (app.Environment.IsDevelopment())
 app.UseTransactionMiddleware();
 
 app.UseHttpsRedirection();
+
+// Enable CORS before authorization and endpoints
+app.UseCors();
 
 app.UseAuthorization();
 

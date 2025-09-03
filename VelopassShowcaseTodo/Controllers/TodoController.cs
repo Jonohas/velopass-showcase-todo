@@ -1,3 +1,4 @@
+using Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace VelopassShowcaseTodo.Controllers;
@@ -6,9 +7,17 @@ namespace VelopassShowcaseTodo.Controllers;
 [Route("/todos")]
 public class TodoController : ControllerBase
 {
-    [HttpGet]
-    public string Get()
+    private readonly ITodoService _service;
+
+    public TodoController(ITodoService service)
     {
-        return "Hello World!";
+        _service = service;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Get(CancellationToken cancellationToken)
+    {
+        var items = await _service.GetAll(cancellationToken);
+        return Ok(items);
     }
 }

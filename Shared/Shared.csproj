@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Shared\Shared.csproj" />
+      <Reference Include="Microsoft.EntityFrameworkCore">
+        <HintPath>..\..\..\.nuget\packages\microsoft.entityframeworkcore\9.0.8\lib\net8.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

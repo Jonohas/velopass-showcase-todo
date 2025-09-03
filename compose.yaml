@@ -1,7 +1,14 @@
-﻿services:
-  velopassshowcasetodo:
-    image: velopassshowcasetodo
-    build:
-      context: .
-      dockerfile: VelopassShowcaseTodo/Dockerfile
+﻿services:      
+  postgres:
+    image: postgres:17
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: velopass_showcase_todo
+      POSTGRES_USER: pg
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
 
+volumes:
+  postgres_data:

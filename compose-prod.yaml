@@ -10,6 +10,9 @@
     depends_on:
       - postgres
     restart: unless-stopped
+    networks:
+      - velopass-net
+      - proxy-net
 
   frontend:
     build:
@@ -19,6 +22,8 @@
     depends_on:
       - velopassshowcasetodo
     restart: unless-stopped
+    networks:
+      - proxy-net
 
   postgres:
     image: postgres:17
@@ -35,6 +40,14 @@
       retries: 5
       start_period: 10s
     restart: unless-stopped
+    networks:
+      - velopass-net
 
 volumes:
   postgres_data:
+    
+networks:
+  velopass-net:
+    driver: bridge
+  proxy-net:
+    external: true

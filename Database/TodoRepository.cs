@@ -11,8 +11,4 @@ public class TodoRepository : EFRepository<Todo, Guid, TodoDbContext>, ITodoRepo
     {
     }
 
-    public Task<List<Todo>> GetAll()
-    {
-        return Context.TodoItems.ToListAsync();
-    }
 }

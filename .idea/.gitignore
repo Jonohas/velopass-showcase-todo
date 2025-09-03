@@ -12,3 +12,6 @@
 /dataSources/
 /dataSources.local.xml
 .idea/**
+/encodings.xml
+/indexLayout.xml
+/vcs.xml

@@ -27,7 +27,7 @@ if (app.Environment.IsDevelopment())
     }
 }
 
-app.UseMiddleware<TransactionMiddleware>();
+app.UseTransactionMiddleware();
 
 app.UseHttpsRedirection();
 

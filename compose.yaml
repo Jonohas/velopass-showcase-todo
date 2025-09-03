@@ -1,0 +1,7 @@
+﻿services:
+  velopassshowcasetodo:
+    image: velopassshowcasetodo
+    build:
+      context: .
+      dockerfile: VelopassShowcaseTodo/Dockerfile
+

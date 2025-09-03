@@ -140,12 +140,10 @@ input[type=text]:active, input[type=text]:focus {
     padding: var(--padding);
     background-color: var(--card-bg-color);
     height: 50%;
-    width: 20%;
     gap: calc(var(--space) * .5);
-    box-shadow: -1px 14px 23px -5px var(--shadow-color);
-    /*box-shadow: 0 calc(var(--space) * .2) calc(var(--space) * .4) calc(var(--space) * 0.1) var(--shadow-color);*/
-    
-    @apply flex flex-col;
+    box-shadow: 0px 14px 23px -5px var(--shadow-color);
+
+    @apply flex flex-col w-[95%] sm:w-[85%] md:w-[65%] lg:w-[70%] xl:w-[60%];
 }
 
 .todoList {

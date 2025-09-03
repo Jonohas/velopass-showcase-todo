@@ -5,10 +5,11 @@ using Shared;
 
 namespace Database;
 
-public class TodoRepository : EFRepository<Todo, Guid, TodoDbContext>, ITodoRepository
+public class TodoRepository(TodoDbContext dbContextFactory)
+    : EFRepository<Todo, Guid, TodoDbContext>(dbContextFactory), ITodoRepository
 {
-    public TodoRepository(TodoDbContext dbContextFactory) : base(dbContextFactory)
+    public Task<List<Todo>> GetAllAsync(CancellationToken cancellationToken)
     {
+        return Set.ToListAsync(cancellationToken);
     }
-
 }

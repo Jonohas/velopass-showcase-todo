@@ -11,9 +11,9 @@ public class TodoService : ITodoService
         _repo = repo;
     }
 
-    public Task<List<Todo>> GetAll(CancellationToken cancellationToken = default)
+    public Task<List<Todo>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return _repo.GetAll(cancellationToken);
+        return _repo.GetAllAsync(cancellationToken);
     }
 
     public Task<Todo?> Get(Guid id, CancellationToken cancellationToken = default)
@@ -21,14 +21,14 @@ public class TodoService : ITodoService
         return _repo.Get(id, cancellationToken);
     }
 
-    public async Task<Todo> Create(string name, bool done, CancellationToken cancellationToken = default)
+    public async Task<Todo> CreateAsync(string name, CancellationToken cancellationToken = default)
     {
-        var todo = Todo.Create(name, done);
+        var todo = Todo.Create(name, false);
         await _repo.SaveAsync(todo, cancellationToken);
         return todo;
     }
 
-    public async Task<bool> Update(Guid id, string name, bool done, CancellationToken cancellationToken = default)
+    public async Task<bool> UpdateAsync(Guid id, string? name, bool? done, CancellationToken cancellationToken = default)
     {
         var todo = await _repo.Get(id, cancellationToken);
         if (todo == null) return false;
@@ -40,7 +40,7 @@ public class TodoService : ITodoService
         return updated;
     }
 
-    public async Task<bool> Delete(Guid id, CancellationToken cancellationToken = default)
+    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var todo = await _repo.Get(id, cancellationToken);
         if (todo == null) return false;

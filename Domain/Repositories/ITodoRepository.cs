@@ -4,5 +4,5 @@ namespace Domain.Repositories;
 
 public interface ITodoRepository : IRepository<Todo, Guid>
 {
-    Task<List<Todo>> GetAll(CancellationToken cancellationToken);
+    Task<List<Todo>> GetAllAsync(CancellationToken cancellationToken);
 }

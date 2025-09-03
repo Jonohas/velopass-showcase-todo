@@ -1,4 +1,5 @@
 using Database;
+using VelopassShowcaseTodo.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
         await dbContext.Database.EnsureCreatedAsync();
     }
 }
+
+app.UseMiddleware<TransactionMiddleware>();
 
 app.UseHttpsRedirection();
 

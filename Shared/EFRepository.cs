@@ -33,7 +33,8 @@ public abstract class EFRepository<TEntity, TKey, TContext> : IRepository<TEntit
       .IgnoreAutoIncludes()
       .FirstOrDefaultAsync(a => a.Id.Equals(id), cancellationToken);
   }
-  
+
+
   public Task<List<TEntity>> GetAll(CancellationToken cancellationToken)
   {
     return Set

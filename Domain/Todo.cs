@@ -17,10 +17,17 @@ public class Todo : Entity<Guid>
         return new Todo(name, done);
     }
 
-    public bool Update(string name, bool done)
+    public bool Update(string? name, bool? done)
     {
-        Name = name;
-        Done = done;
+        if (name != null)
+        {
+            Name = name;
+        }
+
+        if (done != null)
+        {
+            Done = done.Value;
+        }
 
         return true;
     }

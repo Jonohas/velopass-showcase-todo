@@ -10,6 +10,7 @@ public class Todo : Entity<Guid>
         Id = Guid.NewGuid();
         Name = name;
         Done = done;
+        CreatedAt = DateTimeOffset.UtcNow;
     }
 
     public static Todo Create(string name, bool done)

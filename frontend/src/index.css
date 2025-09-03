@@ -11,6 +11,7 @@
     --color-primary-dark: hsl(45, 100%, 25%);
     --input-background-color: hsl(44.7,5%,20%);
     --input-background-color-hover: hsl(44.7,5%,25%);
+    --shadow-color: hsl(44.7,5%,8%);
 
     --space: 1rem; /* your base unit */
 }
@@ -90,20 +91,21 @@ body {
     color: var(--fg-color);
 }
 
-form {
+.form {
     display: flex;
     flex-direction: row;
     gap: calc(var(--space) * .7);
 }
 
 input[type=text] {
+    --padding: calc(var(--space) * .6);
     color: var(--fg-color);
     border-color: var(--border-color);
     border-radius: 0.25rem;
     border-width: 1px;
     border-style: solid;
     
-    padding: 0.25rem;
+    padding: var(--padding);
 }
 input[type=text]:active, input[type=text]:focus {
     outline: none; /* prevent default outline */
@@ -111,19 +113,22 @@ input[type=text]:active, input[type=text]:focus {
     border-color: var(--color-primary);
 }
 
-input[type=submit] {
+.submit {
     --padding: calc(var(--space) * .4);
     background-color: var(--color-primary);
     color: var(--fg-color-primary);
     
     border-radius: var(--padding);
     padding: var(--padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-input[type=submit]:hover {
+.submit:hover {
     background-color: var(--color-primary-hover);
     cursor: pointer;
 }
-input[type=submit]:focus {
+.submit:focus {
     outline: calc(var(--space) * .15) solid var(--color-primary);
     outline-offset: calc(var(--space) * .25);
     cursor: pointer;
@@ -134,9 +139,11 @@ input[type=submit]:focus {
     border-radius: var(--padding);
     padding: var(--padding);
     background-color: var(--card-bg-color);
-    min-height: 50%;
+    height: 50%;
     width: 20%;
     gap: calc(var(--space) * .5);
+    box-shadow: -1px 14px 23px -5px var(--shadow-color);
+    /*box-shadow: 0 calc(var(--space) * .2) calc(var(--space) * .4) calc(var(--space) * 0.1) var(--shadow-color);*/
     
     @apply flex flex-col;
 }
@@ -145,9 +152,18 @@ input[type=submit]:focus {
     --padding: calc(var(--space) * .5);
     display: flex;
     flex-direction: column;
-    gap: calc(var(--space) * .5);
-    height: 100%;
     border-radius: calc(var(--padding));
+    flex: 1;
+    overflow: hidden;
+}
+
+.todoListHeader {
+    overflow-y: auto;
+}
+
+.todoListContent {
+    flex: 1;
+    overflow-y: auto;
 }
 
 .todoItem {
@@ -258,4 +274,46 @@ input[type=submit]:focus {
 
 .inputError {
     @apply border-red-500;
+}
+
+.todoListHeader {
+    --padding: calc(var(--space) * .5);
+    padding: var(--padding);
+    display: flex;
+    gap: calc(var(--space) * .4);
+}
+
+.modeTag {
+    --border-radius: calc(var(--space));
+    background-color: var(--input-background-color);
+    color: var(--fg-color);
+    border-radius: var(--border-radius);
+    padding: calc(var(--space) * .2) calc(var(--space) * .6);
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.modeTag.active {
+    background-color: var(--color-primary);
+    color: var(--fg-color-primary);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: calc(var(--space) * 0.6);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--input-background-color-hover);
 }

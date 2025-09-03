@@ -12,34 +12,33 @@ interface FormElement extends HTMLFormElement {
 }
 
 export const AddTodoForm = () => {
-    const {fetchTodos} = useTodoStore();
-    
+    const {todos, fetchTodos} = useTodoStore();
     const [todoInput, setTodoInput] = useState("");
-    const [hasError, setHasError] = useState(false)
     
-    const submit = async (event: FormEvent<FormElement>) => {
+    const submit = useCallback((event: FormEvent<FormElement>) => {
         event.preventDefault();
         
         if (todoInput.length === 0) {
-            setHasError(true);
             return;
         }
-
-        const response = await addTodo({
-            name: todoInput
-        });
         
-        console.log("response", response, await response.json());
-
-        if (response.ok) {
+        const sendRequest = async () => {
+            const result = await addTodo({
+                name: todoInput
+            });
+            
+            const resultJson = await result.json();
+            setTodoInput("");
             await fetchTodos();
         }
-    }
+
+        sendRequest();
+    }, [todoInput, fetchTodos, todos])
     
     return (
-        <form onSubmit={submit} className={"w-full flex"}>
-            <input className={classNames(hasError ? "inputError" : null, "flex-1")} type={"text"} value={todoInput} onChange={(e) => setTodoInput(e.currentTarget.value)} />
-            <input type={"submit"} value={"Save"} />
+        <form className={"form w-full flex"} onSubmit={submit}>
+            <input className={"flex-1"} type={"text"} value={todoInput} onChange={(e) => setTodoInput(e.currentTarget.value)} />
+            <input type={"submit"}  className={"submit"} value={"Add"}></input>
         </form>
     )
 }

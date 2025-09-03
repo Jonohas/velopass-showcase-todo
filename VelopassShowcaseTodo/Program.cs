@@ -1,4 +1,5 @@
 using Database;
+using Microsoft.EntityFrameworkCore;
 using VelopassShowcaseTodo.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +33,8 @@ if (app.Environment.IsDevelopment())
     await using (var serviceScope = app.Services.CreateAsyncScope())
     await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<TodoDbContext>())
     {
-        await dbContext.Database.EnsureCreatedAsync();
+        await dbContext.Database.EnsureDeletedAsync();
+        await dbContext.Database.MigrateAsync();
     }
 }
 

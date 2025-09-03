@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --hot src/index.tsx",
-    "start": "NODE_ENV=production bun src/index.tsx",
+    "dev": "bun --hot src/index.html",
+    "start": "NODE_ENV=production bun src/index.html",
     "build": "bun run build.ts"
   },
   "dependencies": {

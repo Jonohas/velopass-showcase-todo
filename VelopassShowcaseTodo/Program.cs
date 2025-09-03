@@ -18,6 +18,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    await using (var serviceScope = app.Services.CreateAsyncScope())
+    await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<TodoDbContext>())
+    {
+        await dbContext.Database.EnsureCreatedAsync();
+    }
 }
 
 app.UseHttpsRedirection();

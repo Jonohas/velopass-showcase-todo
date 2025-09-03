@@ -1,10 +1,11 @@
-import {memo, useCallback} from "react";
+import {memo, useCallback, useState} from "react";
 import type {TodoItemType} from "@/features/todos/types/TodoItemType.ts";
 import {updateTodo} from "@/features/todos/services/updateTodo.ts";
 import {useTodoStore} from "@/features/todos/stores/useTodoStore.ts";
 import classNames from "classnames";
 import {Checkbox} from "@/features/todos/components/Checkbox.tsx";
 import {deleteTodo} from "@/features/todos/services/deleteTodo.ts";
+import {TrashIcon} from "@heroicons/react/24/solid";
 
 type TodoItemProps = {
     todo: TodoItemType;
@@ -46,7 +47,9 @@ export const TodoItem = memo((props: TodoItemProps) => {
                 checked={todo.done}
                 onChange={() => updateFinishedState()}
                 />
-            <button onClick={removeTodo}>remove</button>
+            <button onClick={removeTodo} className={"removeItem"}>
+                <TrashIcon className={"min-w-5 min-h-5 removeItemIcon"} />
+            </button>
         </div>
     )
 })

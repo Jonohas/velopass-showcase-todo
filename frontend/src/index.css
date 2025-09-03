@@ -158,17 +158,43 @@ input[type=submit]:focus {
     padding: var(--padding);
 }
 
+.todoItem:hover {
+    border-radius: var(--padding);
+    background-color: var(--bg-color);
+}
+
 .todoItem.done {
     text-decoration: line-through;
 }
 
+.removeItem {
+    @apply p-2 rounded;
+    color: var(--fg-color);
+}
+
+.removeItem:hover {
+    @apply bg-red-500;
+    cursor: pointer;
+}
+
 /* Customize the label (the container) */
 .container {
+    flex: 1;
+    overflow: hidden;
     display: flex;
+    align-items: center;
     position: relative;
     cursor: pointer;
     user-select: none;
     gap: calc(var(--space) * .5);
+    padding: calc(var(--space) * .35);
+}
+
+.container .label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Hide the browser's default checkbox */
@@ -187,8 +213,8 @@ input[type=submit]:focus {
     align-items: center;
     justify-content: center;
     --padding: calc(var(--space) * .2);
-    height: calc(var(--space) * 1.3);
-    width: calc(var(--space) * 1.3);
+    min-height: calc(var(--space) * 1.3);
+    min-width: calc(var(--space) * 1.3);
     background-color: var(--input-background-color);
     border-radius: var(--padding);
     border-width: 1px;
@@ -228,4 +254,8 @@ input[type=submit]:focus {
 /* Show the checkmark when checked */
 .container input:checked ~ .checkmark {
     display: block;
+}
+
+.inputError {
+    @apply border-red-500;
 }

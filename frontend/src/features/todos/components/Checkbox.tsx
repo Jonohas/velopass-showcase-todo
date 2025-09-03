@@ -16,7 +16,9 @@ export const Checkbox = ({checked, onChange, label}: Props) => {
             <span className="checkmark-container">
                 <CheckIcon className="checkmark"></CheckIcon>
             </span>
-            {label}
+            <div className="label">
+                {label}
+            </div>
         </label>
     );
 }

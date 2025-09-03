@@ -1,0 +1,40 @@
+﻿services:
+  velopassshowcasetodo:
+    image: velopassshowcasetodo
+    build:
+      context: .
+      dockerfile: VelopassShowcaseTodo/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=velopass_showcase_todo;Username=pg;Password=mypassword
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      NODE_ENV: "production"
+    depends_on:
+      - velopassshowcasetodo
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:17
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: velopass_showcase_todo
+      POSTGRES_USER: pg
+      POSTGRES_PASSWORD: mypassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pg -d velopass_showcase_todo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

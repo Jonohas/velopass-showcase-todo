@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JV.ResultUtilities" Version="1.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="JV.ResultUtilities">
+      <HintPath>..\..\.nuget\packages\jv.resultutilities\1.0.8\lib\net9.0\JV.ResultUtilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Shared.Domain.csproj" />
+  </ItemGroup>
+</Project>

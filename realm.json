@@ -1,0 +1,134 @@
+[
+  {
+    "realm": "admin",
+    "enabled": true,
+    "displayName": "Admin Realm",
+    "registrationAllowed": true,
+    "loginWithEmailAllowed": true,
+    "duplicateEmailsAllowed": false,
+    "resetPasswordAllowed": true,
+    "editUsernameAllowed": true,
+    "bruteForceProtected": true,
+    "accessTokenLifespan": 900,
+    "refreshTokenMaxReuse": 0,
+    "ssoSessionMaxLifespan": 36000,
+    "sslRequired": "none",
+    "clients": [
+      {
+        "clientId": "react-frontend",
+        "name": "React Frontend Application",
+        "enabled": true,
+        "protocol": "openid-connect",
+        "publicClient": true,
+        "standardFlowEnabled": true,
+        "directAccessGrantsEnabled": false,
+        "fullScopeAllowed": false,
+        "redirectUris": [
+          "http://localhost:3000/*",
+          "http://localhost:3000/auth/callback"
+        ],
+        "webOrigins": [
+          "http://localhost:3000"
+        ],
+        "defaultClientScopes": [
+          "api-access",
+          "profile"
+        ],
+        "attributes": {
+          "pkce.code.challenge.method": "S256",
+          "post.logout.redirect.uris": "http://localhost:3000/logout"
+        },
+        "optionalClientScopes": [
+          "offline_access"
+        ]
+      },
+      {
+        "clientId": "dotnet-backend",
+        "name": ".NET Backend API",
+        "enabled": true,
+        "protocol": "openid-connect",
+        "bearerOnly": true,
+        "publicClient": false,
+        "fullScopeAllowed": false
+      }
+    ],
+    "users": [
+      {
+        "username": "testuser",
+        "enabled": true,
+        "firstName": "Test",
+        "lastName": "User",
+        "email": "test@example.com",
+        "emailVerified": true,
+        "credentials": [
+          {
+            "type": "password",
+            "value": "password123",
+            "temporary": false
+          }
+        ]
+      },
+      {
+        "username": "admin",
+        "enabled": true,
+        "firstName": "Admin",
+        "lastName": "User",
+        "email": "admin@example.com",
+        "emailVerified": true,
+        "credentials": [
+          {
+            "type": "password",
+            "value": "admin123",
+            "temporary": false
+          }
+        ]
+      }
+    ],
+    "clientScopes": [
+      {
+        "name": "api-access",
+        "description": "API Access Scope",
+        "protocol": "openid-connect",
+        "attributes": {
+          "include.in.token.scope": "true"
+        },
+        "protocolMappers": [
+          {
+            "name": "api-audience",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-audience-mapper",
+            "config": {
+              "included.client.audience": "dotnet-backend",
+              "id.token.claim": "false",
+              "access.token.claim": "true"
+            }
+          },
+          {
+            "name": "subject-sub",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-property-mapper",
+            "config": {
+              "user.attribute": "id",
+              "claim.name": "sub",
+              "jsonType.label": "String",
+              "id.token.claim": "false",
+              "access.token.claim": "true"
+            }
+          },
+          {
+            "name": "subject-nameidentifier",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-property-mapper",
+            "config": {
+              "user.attribute": "id",
+              "claim.name": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+              "jsonType.label": "String",
+              "id.token.claim": "false",
+              "access.token.claim": "true"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
